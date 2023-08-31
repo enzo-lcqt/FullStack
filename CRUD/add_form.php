@@ -39,7 +39,7 @@
         <input type="file" name="disc_picture" id="disc_picture"><br><br>
 
         <input type="submit" value="Ajouter">
-        <input  href="index.php" type="submit" value="retour">
+        <a href="index.php"><input type="button" value="Retour"></a>
     </form>
 </body>
 </html>
