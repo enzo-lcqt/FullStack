@@ -71,7 +71,7 @@
             <p><strong>Label:</strong> <?= $disc->disc_label ?></p>
             <p><strong>Année:</strong> <?= $disc->disc_year ?></p>
             <p><strong>Genre:</strong> <?= $disc->disc_genre ?></p>
-            <p><strong>Prix:</strong> <?= $disc->disc_price ?></p>
+            <p><strong>Prix:</strong> <?= $disc->disc_price ?>€</p>
             <p><strong>Artiste:</strong> <?= $disc->artist_name ?></p>
             <a href="edit_form.php?disc_id=<?= $disc->disc_id ?>" class="btn btn-secondary">Modifier</a>
                <form method="post" style="display: inline-block;">
