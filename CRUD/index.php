@@ -1,25 +1,33 @@
 <?php
-    $db = new PDO('mysql:host=localhost;charset=utf8;dbname=record', 'admin', 'admin1234');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    include('php/connexion.php');
+
+    // Récupérer tous les disques depuis la base de données
     $requete = $db->query("SELECT * FROM disc");
+    
+    // Stocker les résultats dans un tableau d'objets
     $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
+    
+    // Fermer la requête
     $requete->closeCursor();
-    $count = count($tableau); // Compter le nombre de disques
+    
+    // Compter le nombre de disques récupérés
+    $count = count($tableau);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Liste des disques</title>
-<style>
+    <style>
+        /* Styles CSS pour la mise en page */
         .disc-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
         .disc {
-            width: 48%; /* 48% to leave some space between the columns */
+            width: 48%; /* 48% pour laisser de l'espace entre les colonnes */
             display: flex;
             margin-bottom: 20px;
         }
@@ -31,7 +39,7 @@
         .disc-image img {
             max-width: 100%;
             height: 300px;
-            width: 300px
+            width: 300px;
         }
         .disc-details {
             width: 70%;
@@ -63,12 +71,12 @@
             margin-right: 10px;
             display: inline-block;
         }
-    </style> 
+    </style>
 </head>
 <body>
+    <!-- Afficher le nombre de disques -->
     <h1>Liste des disques (<?= $count ?>)</h1>
    
-    
     <div class="disc-container">
         <?php foreach ($tableau as $disc): ?>
             <div class="disc">
@@ -80,14 +88,17 @@
                     <p><strong>Label:</strong> <?= $disc->disc_label ?></p>
                     <p><strong>Genre:</strong> <?= $disc->disc_genre ?></p>
                     <p><strong>Year:</strong> <?= $disc->disc_year ?></p>
+                    <!-- Lien vers les détails du disque -->
                     <a href="details_disc.php?disc_id=<?= $disc->disc_id ?>" style="text-decoration: none;" class="btn-details">Détails</a>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
+    <!-- Lien pour ajouter un disque -->
     <a href="add_form.php" style="text-decoration: none;" class="fixed-button">Ajouter un disque</a>
 
     <script>
+        // JavaScript pour gérer les boutons d'édition
         const editButtons = document.querySelectorAll('.edit-button');
         const editForms = document.querySelectorAll('.edit-form');
 

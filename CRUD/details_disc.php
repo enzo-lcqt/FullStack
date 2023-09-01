@@ -1,19 +1,20 @@
 <?php
-    $db = new PDO('mysql:host=localhost;charset=utf8;dbname=record', 'admin', 'admin1234');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include('php/connexion.php');
 
+    // Récupération des détails du disque à partir de la base de données
     $requete = $db->prepare("SELECT disc.*, artist.artist_name FROM disc
                             JOIN artist ON disc.artist_id = artist.artist_id
                             WHERE disc.disc_id = ?");
     $requete->execute(array($_GET["disc_id"]));
     $disc = $requete->fetch(PDO::FETCH_OBJ);
 
+    // Traitement de la suppression du disque
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_disc'])) {
-        // Code de suppression du disque de la base de données
+        // Suppression du disque de la base de données
         $deleteQuery = $db->prepare("DELETE FROM disc WHERE disc_id = ?");
         $deleteQuery->execute(array($disc->disc_id));
 
-        // Redirection vers la page index après suppression
+        // Redirection vers la page d'index après suppression
         header("Location: index.php");
         exit;
     }
@@ -24,6 +25,7 @@
     <meta charset="UTF-8">
     <title>Détails du disque</title>
     <style>
+        /* Styles CSS pour la mise en page */
         .details-container {
             display: flex;
             justify-content: space-between;
@@ -67,17 +69,24 @@
             <img src="<?= $disc->disc_picture ?>" alt="<?= $disc->disc_title ?>">
         </div>
         <div class="disc-details">
+            <!-- Affichage des détails du disque -->
             <p><strong>Titre:</strong> <?= $disc->disc_title ?></p>
             <p><strong>Label:</strong> <?= $disc->disc_label ?></p>
             <p><strong>Année:</strong> <?= $disc->disc_year ?></p>
             <p><strong>Genre:</strong> <?= $disc->disc_genre ?></p>
             <p><strong>Prix:</strong> <?= $disc->disc_price ?>€</p>
             <p><strong>Artiste:</strong> <?= $disc->artist_name ?></p>
+
+            <!-- Bouton pour modifier le disque -->
             <a href="edit_form.php?disc_id=<?= $disc->disc_id ?>" class="btn btn-secondary">Modifier</a>
-               <form method="post" style="display: inline-block;">
+
+            <!-- Formulaire de confirmation de suppression -->
+            <form method="post" style="display: inline-block;">
                 <input type="hidden" name="disc_id" value="<?= $disc->disc_id ?>">
                 <button type="submit" class="btn btn-delete" name="delete_disc" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce disque ?')">Supprimer</button>
             </form>
+
+            <!-- Bouton pour retourner à la liste des disques -->
             <a href="index.php" class="btn">Retour</a>
         </div>
     </div>
