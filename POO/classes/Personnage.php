@@ -33,11 +33,10 @@ class Personnage {
 $personnage = new Personnage("Doe", "John", 30, "Homme");
 
 // Accès aux attributs en utilisant les accesseurs
-echo "Nom du personnage 1 : " . $personnage->getNom() . "\n";
-echo "<br>";
-echo "Prénom du personnage 2 : " . $personnage->getPrenom() . "\n";
-echo "<br>";
-echo "Âge du personnage 1 : " . $personnage->getAge() . "\n";
-echo "<br>";
-echo "Sexe du personnage 2 : " . $personnage->getSexe() . "\n";
+echo "Nom du personnage : " . $personnage->getNom() . "<br>";
+echo "Prénom du personnage : " . $personnage->getPrenom() . "<br>";
+echo "Âge du personnage : " . $personnage->getAge() . "<br>";
+echo "Sexe du personnage : " . $personnage->getSexe() . "<br>";
 ?>
+
+
