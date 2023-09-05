@@ -1,6 +1,7 @@
 <?php
 
 class Employe {
+    // Propriétés de la classe 
     private $nom;
     private $prenom;
     private $dateEmbauche;
@@ -8,6 +9,7 @@ class Employe {
     private $salaireAnnuel;
     private $service;
 
+    // initialiser les propriétés lors de la creation
     public function __construct($nom, $prenom, $dateEmbauche, $fonction, $salaireAnnuel, $service) {
         $this->nom = $nom;
         $this->prenom = $prenom;

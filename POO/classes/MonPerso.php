@@ -1,9 +1,19 @@
 <?php
-require 'Personnage.php'; // Incluez le fichier contenant la classe Personnage
-echo "<br>";
+// Inclure le fichier de la classe Personnage
+require_once('Personnage.php');
 
-$p = new Personnage("Lebowski", "Jeff", 0, ""); // Les valeurs "0" et "" sont utilisées pour l'âge et le sexe par défaut
+// Créer une instance de la classe Personnage
+$p = new Personnage();
 
+// Définir les attributs du personnage
+$p->setNom("Lebowski");
+$p->setPrenom("Jeff");
+$p->setAge(20);
+$p->setSexe("Masculin");
+
+// Afficher les informations du personnage
 echo "Nom : " . $p->getNom() . "<br>";
 echo "Prénom : " . $p->getPrenom() . "<br>";
+echo "Âge : " . $p->getAge() . "<br>";
+echo "Sexe : " . $p->getSexe() . "<br>";
 ?>

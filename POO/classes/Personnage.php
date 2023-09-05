@@ -1,42 +1,60 @@
 <?php
-class Personnage {
+class Personnage
+{
+    // Attributs privés pour stocker les données du personnage
     private $nom;
     private $prenom;
     private $age;
     private $sexe;
 
-    public function __construct($nom, $prenom, $age, $sexe) {
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->age = $age;
-        $this->sexe = $sexe;
-    }
-
-    public function getNom() {
+    // obtenir le nom du personnage
+    public function getNom()
+    {
         return $this->nom;
     }
 
-    public function getPrenom() {
+    // définir le nom du personnage
+    public function setNom($nom)
+    {
+        // Utilisation de $this pour faire référence à l'instance courante (l'objet)
+        // Permet de définir la valeur de l'attribut privé $nom avec la valeur passée en argument
+        $this->nom = $nom;
+    }
+
+    // obtenir le prénom du personnage
+    public function getPrenom()
+    {
         return $this->prenom;
     }
 
-    public function getAge() {
+    // définir le prénom du personnage
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    }
+
+    // obtenir l'âge du personnage
+    public function getAge()
+    {
         return $this->age;
     }
 
-    public function getSexe() {
+    // définir l'âge du personnage
+    public function setAge($age)
+    {
+        $this->age = $age;
+    }
+
+    // obtenir le sexe du personnage
+    public function getSexe()
+    {
         return $this->sexe;
     }
+
+    // Setter pour définir le sexe du personnage
+    public function setSexe($sexe)
+    {
+        $this->sexe = $sexe;
+    }
 }
-
-// Exemple d'utilisation de la classe Personnage
-$personnage = new Personnage("Doe", "John", 30, "Homme");
-
-// Accès aux attributs en utilisant les accesseurs
-echo "Nom du personnage : " . $personnage->getNom() . "<br>";
-echo "Prénom du personnage : " . $personnage->getPrenom() . "<br>";
-echo "Âge du personnage : " . $personnage->getAge() . "<br>";
-echo "Sexe du personnage : " . $personnage->getSexe() . "<br>";
 ?>
-
-
