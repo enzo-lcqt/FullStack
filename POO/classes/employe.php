@@ -25,7 +25,7 @@ class Employe {
         $dateActuelle = new DateTime();
 
         // Vérifiez si la date actuelle est le 30 novembre (date de versement de la prime)
-        if ($dateActuelle->format('d-m') === '06-09') {
+        if ($dateActuelle->format('d-m') === '07-09') {
             // Calcul de la prime basée sur le salaire annuel et l'ancienneté
             $prime = ($this->salaireAnnuel * 0.05) + ($this->salaireAnnuel * ($this->anneesDansEntreprise() * 0.02));
 
