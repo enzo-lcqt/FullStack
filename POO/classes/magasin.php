@@ -51,6 +51,7 @@ class Employe {
     private $salaireAnnuel;
     private $service;
     private $magasin;
+    private $enfants = []; 
 
     // Constructeur de la classe Employe
     public function __construct($nom, $prenom, $dateEmbauche, $fonction, $salaireAnnuel, $service, $magasin) {
@@ -117,6 +118,50 @@ class Employe {
         // Vérifiez si l'employé a au moins un an d'ancienneté
         return $difference->y >= 1;
     }
+
+    public function ajouterEnfant($nom, $age) {
+        $enfant = new Enfant($nom, $age);
+        $this->enfants[] = $enfant;
+    }
+
+    // Méthode pour obtenir la liste des enfants de l'employé
+    public function getEnfants() {
+        return $this->enfants;
+    }
+}
+
+class Enfant {
+    private $nom;
+    private $age;
+
+    // Constructeur de la classe Enfant
+    public function __construct($nom, $age) {
+        $this->nom = $nom;
+        $this->age = $age;
+    }
+
+    // Méthode pour obtenir le nom de l'enfant
+    public function getNom() {
+        return $this->nom;
+    }
+
+    // Méthode pour obtenir l'âge de l'enfant
+    public function getAge() {
+        return $this->age;
+    }
+
+    // Méthode pour déterminer le montant du chèque Noël pour cet enfant
+    public function getMontantChequeNoel() {
+        if ($this->age >= 0 && $this->age <= 10) {
+            return 20; // 20 € pour les enfants de 0 à 10 ans
+        } elseif ($this->age >= 11 && $this->age <= 15) {
+            return 30; // 30 € pour les enfants de 11 à 15 ans
+        } elseif ($this->age >= 16 && $this->age <= 18) {
+            return 50; // 50 € pour les enfants de 16 à 18 ans
+        } else {
+            return 0; // Pas de chèque Noël pour cet enfant
+        }
+    }
 }
 
 // Création de plusieurs instances de la classe Magasin
@@ -127,10 +172,15 @@ $magasin3 = new Magasin("Magasin C", "789 rue amiens", "80000", "Amiens", "Resta
 
 // Création d'un employé associé à ce magasin
 $employe1 = new Employe("Doe", "John", "2020-11-15", "Ingénieur", 50000, "Développement", $magasin1);
+$employe1->ajouterEnfant("Enfant1", 8);
 $employe2 = new Employe("Smith", "Alice", "2019-08-10", "Comptable", 45000, "Comptabilité", $magasin3);
+$employe2->ajouterEnfant("Enfant2", 19);
 $employe3 = new Employe("Johnson", "Bob", "2023-12-20", "Vente", 48000, "Commercial", $magasin1);
+$employe3->ajouterEnfant("Enfant3", 12);
 $employe4 = new Employe("Brown", "Emily", "2018-03-05", "RH", 52000, "Ressources Humaines", $magasin3);
+$employe4->ajouterEnfant("Enfant4", 29);
 $employe5 = new Employe("Wilson", "Mike", "2023-12-28", "Marketing", 49000, "Marketing", $magasin2);
+$employe5->ajouterEnfant("Enfant5", 18);
 $employes = [$employe1, $employe2, $employe3, $employe4, $employe5];
 
 // Pour obtenir le magasin associé à un employé
@@ -170,5 +220,16 @@ foreach ($employes as $employe) {
         echo $employe->getNom() . " ne peut pas disposer de chèques-vacances.<br>";
     }
 }
+echo"<br>";
+echo"7- Modifier le programme afin de gérer l'attribution des chèques Noël aux enfants des salariés : <br>";
+foreach ($employes as $employe) {
+    $enfants = $employe->getEnfants();
+    $montantTotal = 0;
+    foreach ($enfants as $enfant) {
+        $montantTotal += $enfant->getMontantChequeNoel();
+    }
+    echo $employe->getNom() . " peut avoir des chèques Noël (Montant total : " . $montantTotal . " €).<br>";
+}
+
 
 ?>
