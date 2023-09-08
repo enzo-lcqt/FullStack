@@ -38,7 +38,7 @@ $mail->isHTML(true);
 
 
 // Sujet du mail
-$mail->Subject = 'Test PHPMailer';
+$mail->Subject = 'Test ';
 
 // Corps du message
 $mail->Body = "On teste l'envoi de mails avec PHPMailer";
